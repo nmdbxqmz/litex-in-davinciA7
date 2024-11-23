@@ -2,10 +2,10 @@
 本仓库适用于Windows上有Vivado，仅使用Ubuntu虚拟机安装litex环境的情况
 
 ## litex环境安装：
-*官方参考文档：
+* 官方参考文档：
 >https://github.com/litex-hub/linux-on-litex-vexriscv/tree/69545456c5ccfbc88973107d64c1b7097c9f4c9b
 
-*视频参考：
+* 视频参考：
 >https://www.bilibili.com/video/BV1qd4y1V7y3/?spm_id_from=333.337.search-card.all.click&vd_source=a29c870e10911c3164efd99cf889c405
 
 ### 安装python3环境：
@@ -22,6 +22,7 @@ python3 -m venv venv
 ``` 
 source venv/bin/activate
 ```
+
 * 安装需要的包
 ```
 pip3 install meson
@@ -72,7 +73,7 @@ sdk install java $(sdk list java | grep -o "\b8\.[0-9]*\.[0-9]*\-tem" | head -1)
 ```
 * 用sdkman安装sbt（也很慢，大概半小时左右才能下完）
 ```
-sdk install sb
+sdk install sbt
 ```
 ### 安装verilator（仿真用）
 参考文档：
