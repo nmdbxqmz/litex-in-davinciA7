@@ -153,7 +153,7 @@
     ```
     下面为make.py的部分参数：
     ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/make_help.png)
-* 生成arty这个板子的源文件（-load为生成bit流 -flash为烧录，我们这些操作在window上运行，所以不填）
+* 生成arty这个板子的源文件（-build为生成bit流 -load为烧录，我们这些操作在window上运行，在使用上面已支持的Board时不填）
     ```
     python3 make.py --board=arty
     ```
