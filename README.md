@@ -23,7 +23,7 @@ python3 -m venv venv  //后面一个venv即为你取的文件夹名
 source venv/bin/activate
 ```
 下图为在桌面这个位置创建文件夹venv并在该文件夹里创建虚拟环境，然后从桌面这个位置打开终端，激活环境后的示例：
-！(https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/activate.png)
+![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/activate.png)
 * 安装需要的包
 ```
 pip3 install meson
@@ -31,7 +31,9 @@ pip3 install meson
 
 ### 克隆git仓库：
 * 首先在python3虚拟环境venv下创建一个文件夹，然后激活环境后用终端cd到该文件夹内
-` git clone https://github.com/litex-hub/linux-on-litex-vexriscv.git`
+```
+git clone https://github.com/litex-hub/linux-on-litex-vexriscv.git
+```
 * 下载litex_setup并运行
 ```
 wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
