@@ -1,5 +1,6 @@
 # litex-in-davinciA7
-本仓库适用于Windows上有Vivado，仅使用Ubuntu虚拟机安装litex环境的情况
+本仓库适用Windows上有Vivado，仅使用Ubuntu虚拟机安装litex环境的情况（用WSL或Ubuntu+Vivado的可以参考部分）
+使用的FPGA板卡为正点原子的达芬奇A7
 
 ## litex环境安装：
 * 官方参考文档：
