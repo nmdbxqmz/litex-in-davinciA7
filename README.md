@@ -11,18 +11,19 @@
 ### 安装python3环境：
 * 安装python3
 ```
-sudo apt install build-essential device-tree-compiler wget git python3-setuptools `
+sudo apt install build-essential device-tree-compiler wget git python3-setuptools 
 sudo apt install python3-full
 ```
-* 在当前路径下创建一个python3虚拟环境venv（不用虚拟环境的话运行.py文件可能会报错）
+* 选择一个位置创建一个文件夹venv（也可以自己随便取一个），然后在该位置打开终端用下面的命令在venv文件夹里创建虚拟环境（不用虚拟环境的话运行.py文件可能会报错）
 ```
-python3 -m venv venv
+python3 -m venv venv  //后面一个venv即为你取的文件夹名
 ```
 * 激活环境（下面的命令需要在venv文件夹的上一级打开终端）
 ``` 
 source venv/bin/activate
 ```
-
+下图为在桌面这个位置创建文件夹venv并在该文件夹里创建虚拟环境，然后从桌面这个位置打开终端，激活环境后的示例：
+！(https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/activate.png)
 * 安装需要的包
 ```
 pip3 install meson
@@ -35,11 +36,13 @@ pip3 install meson
 ```
 wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
 chmod +x litex_setup.py
-litex_setup.py --init --install
+python3 litex_setup.py --init --install
 ```
+如果不使用虚拟环境去运行.py文件会可能会报错误，下图为运行python3 litex_setup.py --init --install时报的错误：
+!()
 * 运行后再update一下，不然后面运行make时可能会报错
 ```
-litex_setup.py --update
+python3 litex_setup.py --update
 ```
 
 ### 安装gcc riscv 工具链
