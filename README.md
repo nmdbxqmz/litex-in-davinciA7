@@ -30,18 +30,21 @@ pip3 install meson
 ```
 
 ### 克隆git仓库：
-* 首先在python3虚拟环境venv下创建一个文件夹，然后激活环境后用终端cd到该文件夹内
+* 首先在python3虚拟环境venv下创建一个文件夹litex（方便管理），然后cd到该文件夹内运行下面的指令
 ```
 git clone https://github.com/litex-hub/linux-on-litex-vexriscv.git
 ```
-* 下载litex_setup并运行
+* 激活虚拟环境后再cd到litex文件夹内下载litex_setup.py并运行
 ```
 wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
 chmod +x litex_setup.py
 python3 litex_setup.py --init --install
 ```
 如果不使用虚拟环境去运行.py文件会可能会报错误，下图为运行python3 litex_setup.py --init --install时报的错误：
-!()
+![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/litex_setup_error.png)
+
+想要了解一下报错信息的可以参考一下这篇CSDN文章：
+>https://blog.csdn.net/qq_25439417/article/details/139485697
 * 运行后再update一下，不然后面运行make时可能会报错
 ```
 python3 litex_setup.py --update
@@ -80,6 +83,7 @@ sdk install java $(sdk list java | grep -o "\b8\.[0-9]*\.[0-9]*\-tem" | head -1)
 ```
 sdk install sbt
 ```
+
 ### 安装verilator（仿真用）
 参考文档：
 >https://blog.csdn.net/2201_75757246/article/details/142878616
@@ -140,15 +144,21 @@ openocd -v
 
 ### 测试环境
 * 激活虚拟环境，然后cd到linux-on-litex-vexriscv这个目录里，运行make.py
+下图为在'桌面->venv->litex->liunx-on-litext-vexriscv->make.py'目录结构下执行上述操作的示例：
+![]()
 * 输出帮助信息，可以看看有哪些参数可以填
 ```
 python3 make.py -h
 ```
+下面为make.py的部分参数：
+![]()
 * 生成arty这个板子的源文件（-load为生成bit流 -flash为烧录，我们这些操作在window上运行，所以不填）
 ```
 python3 make.py --board=arty
 ```
 * 如果环境安装成功，文件会生成在 linux-on-litex-vexriscv/buid/arty 目录里
+下面为示例图片：
+![]()
 
 
 
