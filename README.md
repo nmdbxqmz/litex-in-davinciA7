@@ -2,8 +2,11 @@
 本仓库适用于Windows上有Vivado，仅使用Ubuntu虚拟机安装litex环境的情况
 
 ## litex环境安装：
-官方参考文档：
+*官方参考文档：
 >https://github.com/litex-hub/linux-on-litex-vexriscv/tree/69545456c5ccfbc88973107d64c1b7097c9f4c9b
+
+*视频参考：
+>https://www.bilibili.com/video/BV1qd4y1V7y3/?spm_id_from=333.337.search-card.all.click&vd_source=a29c870e10911c3164efd99cf889c405
 
 ### 安装python3环境：
 * 安装python3
@@ -100,6 +103,47 @@ sudo make install
 ```
 verilator --version
 ```
+
+### 安装openocd
+参考文档：
+>https://blog.csdn.net/qq_40839071/article/details/114700646
+* 安装依赖的软件
+```
+sudo apt install libtool automake pkg-config libusb-1.0-0-dev libz-dev
+sudo apt-get install libtool automake libusb-1.0.0-dev texinfo libusb-dev libyaml-dev pkg-config
+```
+* 克隆openocd仓库
+```
+sudo git clone https://github.com/SpinalHDL/openocd_riscv.git
+```
+* 执行以下操作（在openocd仓库所在目录的上一级打开终端）
+```
+cd openocd_riscv/
+sudo git submodule update --init --recursive
+sudo chmod 777 -R ../openocd_riscv
+sudo ./bootstrap
+sudo apt-get install libhidapi*
+./configure --enable-maintainer-mode --enable-usb_blaster_libftdi --enable-ftdi --enable-dummy
+make
+sudo make install
+```
+* 验证是否安装成功，成功会显示版本号
+```
+openocd -v
+```
+
+### 测试环境
+* 激活虚拟环境，然后cd到linux-on-litex-vexriscv这个目录里，运行make.py
+* 输出帮助信息，可以看看有哪些参数可以填
+```
+python3 make.py -h
+```
+* 生成arty这个板子的源文件（-load为生成bit流 -flash为烧录，我们这些操作在window上运行，所以不填）
+```
+python3 make.py --board=arty
+```
+* 如果环境安装成功，文件会生成在 linux-on-litex-vexriscv/buid/arty 目录里
+
 
 
 
