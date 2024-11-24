@@ -31,6 +31,7 @@
     ```
     
 ### 安装ninja软件
+* 直接在任意位置打开终端执行以下指令即可：
     ```
     sudo apt install ninja
     ```
