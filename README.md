@@ -25,9 +25,14 @@
     ```
     下图为在桌面这个位置创建文件夹venv并在该文件夹里创建虚拟环境，然后从桌面这个位置打开终端，激活环境后的示例：
     ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/activate.png)
-* 安装需要的包
+* 安装需要的包，激活虚拟环境然后执行以下指令：
     ```
     pip3 install meson
+    ```
+    
+### 安装ninja软件
+    ```
+    sudo apt install ninja
     ```
 
 ### 克隆git仓库：
