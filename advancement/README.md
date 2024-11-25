@@ -186,20 +186,20 @@ target可以分为3个部分，分别为时钟域的定义，Soc的时钟、核�
 make.py的文件地址：
 >https://github.com/litex-hub/linux-on-litex-vexriscv/blob/69545456c5ccfbc88973107d64c1b7097c9f4c9b/make.py
 
-其中的部分截图如下所示，可以看到它从boards中读取支持的板卡：
-![]()
+其中make.py最上面的截图如下所示，可以看到它从boards中读取支持的板卡：
+![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/get_support_boards.png)
 
 我们再看一下boards.py，如下图所示为是一般板子的书写格式，如果没有相应的board则会报错，这就是为什么在with_linux中需要手动往boards.py添加相应board的原因了，其中在Board.__init__中还有soc_capabilities这个参数，有什么用呢？我们再往下看
 
 boards.py地址 >https://github.com/litex-hub/linux-on-litex-vexriscv/blob/69545456c5ccfbc88973107d64c1b7097c9f4c9b/boards.py#L19
 
-![]()
+![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/boards_support.png)
 
 下图为main函数开头的部分，读取指令中的参数：
-![]()
+![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/main_top.png)
 
-再后面看到peripheral就初见端倪了，原来Board.__init__中的soc_capabilities这个参数是被用在了这里，所以在使用make.py（with_linux）时，我们不能使用no_linux中--with--xx，而应该去boards.py中去修改对应板子定义里Board.__init__中的soc_capabilities，同时注意到没有video_colorbars这个参数，但是我需要用它来更新with_video_colorbars,所以这就是with_linux中需要添加上那些语句的原因了
-![]()
+往后看到peripheral就初见端倪了，原来Board.__init__中的soc_capabilities这个参数是被用在了这里，所以在使用make.py（with_linux）时，我们不能使用no_linux中--with--xx，而应该去boards.py中去修改对应板子定义里Board.__init__中的soc_capabilities，同时注意到没有video_colorbars这个参数，但是我需要用它来更新with_video_colorbars,所以这就是with_linux中需要添加上那些语句的原因了
+![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/main_peripherals.png)
 
 再后面看，可以看到如图所示的内容，部分参数会直接生成相应的外设，所以可以把target中相关外设的生成代码删除掉
-![]()
+![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/peripherals_direct.png)
