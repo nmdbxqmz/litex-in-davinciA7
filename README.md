@@ -2,6 +2,14 @@
 * 本仓库适用Windows上有Vivado，仅使用Ubuntu虚拟机安装litex环境的情况（用WSL或Ubuntu+Vivado的可以参考部分）
 * 使用的FPGA板卡为正点原子的达芬奇A7
 
+## 目录结构说明
+* QuickStart：快速入门，里面有写怎么简单构建源文件，并生成bit流将其烧入到板卡上
+* advancement：进阶教程，里面含有达芬奇A7的相关支持文件和构建源文件、烧入板卡的教程，有对platform、target文件和源文件构建过程的简单解析
+* prebuild：预构建文件，即QuickStart、advancement中执行构建源文件后生成的.v文件及其相关文件，环境安装失败、QuickStart、advancement执行构建操作失败的可以用这里面的来生成bit流
+* software：QuickStart、advancement中执行构建源文件后生成的配套c语言库函数，可用由来编写对应板的程序，生成bin文件后可载入板卡中运行
+* images：本仓库中所用到的图片
+* 建议阅读顺序：litex环境安装->QuickStart->advancement->software
+
 ## litex环境安装：
 * 官方参考文档：
 >https://github.com/litex-hub/linux-on-litex-vexriscv/tree/69545456c5ccfbc88973107d64c1b7097c9f4c9b
