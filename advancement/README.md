@@ -27,14 +27,14 @@
 * 修改davinci.c和davinci.xdc如下图所示，因为lcd的bl引脚官方给的函数不支持，所以要手动添加并上拉：
 
   davinci.c修改如下，在模块声明中添加output wire lcd_bl：
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/.v_add.png)
 
   davinci.xdc修改如下，在xdc中添加lcd_bl的约束并上拉：
   ```
   set_property -dict {PACKAGE_PIN V7 IOSTANDARD LVCMOS33} [get_ports lcd_bl]
   set_property PULLUP true [get_ports lcd_bl]
   ```
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/xdc_add.png)
   
 * 启动window中的vivado，将.v和.xdc全部添加进来，选择对应的板卡型号，生成bit流烧入进板卡，此时可以看到lcd屏依次显示白、红、绿、蓝、黑的颜色
 * 剩下步骤与快速入门一致，这里不过多赘述了
@@ -46,8 +46,8 @@
   if "video_colorbars" in board.soc_capabilities:
     soc_kwargs.update(with_colorbars=True)
   ```
-  ![]()
-*修改linux-on-litex-vexriscv/boards.py文件如图所示，添加：
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/make_change.png)
+* 修改linux-on-litex-vexriscv/boards.py文件如图所示，添加：
   ```
   class davinci(Board):
     def __init__(self):
@@ -70,7 +70,7 @@
         })
 
   ```
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/boards_change.png)
 * 或将本仓库no_linux中make.py和boards.py直接覆盖官方仓库中的make.py和boards.py，与上面的两步等效
 * 激活环境
 * cd到官方仓库中linux-on-litex-vexriscv文件夹里
@@ -83,12 +83,12 @@
   python3 venv/litex/linux-on-litex-vexriscv/make.py --board=davinci
   ```
 * 生成的源文件一般会在linux-on-litex-vexriscv/build/davinci中
-* 将build/davinci/gateware中的文件全部拷贝到你PFGA项目的rtl中,同时也要拷贝venv/litex/pythondata-cpu-vexriscv-smp/pythondata_cpu_vexriscv_smp/verilog/Ram_1w_1rs_Generic.v文件
+* 将build/davinci/gateware中的文件全部拷贝到你PFGA项目的rtl中，同时也要拷贝venv/litex/pythondata-cpu-vexriscv-smp/pythondata_cpu_vexriscv_smp/verilog/Ram_1w_1rs_Generic.v文件
   和venv/litex/pythondata-cpu-vexriscv-smp/pythondata_cpu_vexriscv_smp/verilog/VexRiscvLitexSmpCluster_Cc1_Iw32Is4096Iy1_Dw32Ds4096Dy1_ITs4DTs4_Ldw128_Ood_Hb1.v文件到rtl中
 * 修改davinci.c和davinci.xdc如下图所示，因为lcd的bl引脚官方给的函数不支持，所以要手动添加并上拉：
 
   davinci.c修改如下，在模块声明中添加output wire lcd_bl：
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/.v_add.png)
 
   davinci.xdc修改如下，在xdc中添加lcd_bl的约束并上拉：
   ```
@@ -96,7 +96,7 @@
   set_property PULLUP true [get_ports lcd_bl]
 
   ```
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/xdc_add.png)
   
 * 启动window中的vivado，将.v和.xdc全部添加进来，选择对应的板卡型号，生成bit流烧入进板卡，此时可以看到lcd屏显示彩条
 * 剩下步骤与快速入门一致，这里不过多赘述了
