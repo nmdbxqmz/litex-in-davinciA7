@@ -38,6 +38,7 @@
   
 * 启动window中的vivado，将.v和.xdc全部添加进来，选择对应的板卡型号，生成bit流烧入进板卡，此时可以看到lcd屏依次显示白、红、绿、蓝、黑的颜色
 * 剩下步骤与快速入门一致，这里不过多赘述了
+* 还有一件事，不知道为什么当主频为100M时，波特率变成了57600（115200的一半），开串口助手时记得修改波特率为57600
 
 ## with_linux使用教程
 * 将本仓库with_linux中platform/hseda_xc7a35t.py覆盖掉官方仓库中platforms/hseda_xc7a35t.py，同理将本仓库with_linux中targets/hseda_xc7a35t.py覆盖掉官方仓库中targets/hseda_xc7a35t.py
@@ -100,4 +101,47 @@
   
 * 启动window中的vivado，将.v和.xdc全部添加进来，选择对应的板卡型号，生成bit流烧入进板卡，此时可以看到lcd屏显示彩条
 * 剩下步骤与快速入门一致，这里不过多赘述了
+* 还有一件事，不知道为什么当主频为100M时，波特率变成了57600（115200的一半），开串口助手时记得修改波特率为57600
+  
+## 官方仓库中需要经常浏览（对使用者较为重要）的文件
+* litex Wiki：有litex的初步介绍和很多链接仓库，可以跳转到与litex相关的其他仓库（比如下面两个）
+  >https://github.com/enjoy-digital/litex/wiki
+* litex cores：soc的外设文件，别人已经写好了外设生成文件，我们只需要调用他们给的函数即可（赞美面对对象的编程）
+  >https://github.com/enjoy-digital/litex/tree/10dcc736767deb41bb172005631740bdd1fe6d9d/litex/soc/cores
+* litex boards：有支持很多板卡的platform和target文件，不知道platform和target文件怎么写的可以在这里参考别人怎么写的
+  >https://github.com/litex-hub/litex-boards
+* litex software：c语言库函数，在虚拟机中生成源文件时会生成software，但是一部分文件变成了.o或.d文件看不了，所以写板上运行的程序时不知道函数怎么写时可以在里面找，其中的demo是给的示例，可以参考一下
+  >https://github.com/enjoy-digital/litex/tree/10dcc736767deb41bb172005631740bdd1fe6d9d/litex/soc/software
+
+## platform初步解析
+platform可以分为2个部分，一个是外设的io引脚声明，另一个就是Platform类的定义（在target中会被调用到）
+### 外设io引脚声明
+* 一般来说去添加和修改_io[...]里面这个部分即可，connectors这个部分不需要去修改
+* 一般而言，只有一个io引脚的外设定义的为：
+  ```
+  (name,index,Pins(),IOStandard())
+  ```
+  有多个io引脚的外设定义的为：
+  ```
+  (name,index，Subsignal(name, Pins(),[IOStandard()],[Misc()]),Subsignal(name, Pins(),[IOStandard()],[Misc()])...,[IOStandard()],[Misc()])
+  ```
+  下图为io引脚声明的部分截图：
+  ![]()
+* 不会写的话就去官方给的platforms中找相似的，基本上改改Pins和IOStandard就可以用
+### Platform类的定义
+* 一开始的两行为默认时钟名字和频率
+* __init__()函数为platform类的初始化函数,如下图所示：
+  ![]()
+  其中被调用的Xilinx7SeriesPlatform()函数定义如下：
+  >https://github.com/enjoy-digital/litex/blob/10dcc736767deb41bb172005631740bdd1fe6d9d/litex/build/xilinx/platform.py
+  Xilinx7SeriesPlatform()函数中有调用 GenericPlatform.__init__()函数，定义如下：
+  >https://github.com/enjoy-digital/litex/blob/10dcc736767deb41bb172005631740bdd1fe6d9d/litex/build/generic_platform.py
+* create_programmer()函数与烧录、openocd调试有关，在如果指令中含有--load或--flash则在target文件中会被调用因为我们在Window上执行这些操作，所以可以不用管
+  下图为create_programmer()在target中被调用的位置：
+  ![]()
+* do_finalize()，目前没有找到被调用的位置，暂时不知道是干什么用的
+  下图为Platform类的定义的截图：
+  ![]()
+
+
   
