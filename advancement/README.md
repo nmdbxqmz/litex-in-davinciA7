@@ -126,22 +126,25 @@ platform可以分为2个部分，一个是外设的io引脚声明，另一个就
   (name,index，Subsignal(name, Pins(),[IOStandard()],[Misc()]),Subsignal(name, Pins(),[IOStandard()],[Misc()])...,[IOStandard()],[Misc()])
   ```
   下图为io引脚声明的部分截图：
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/io_example.png)
 * 不会写的话就去官方给的platforms中找相似的，基本上改改Pins和IOStandard就可以用
 ### Platform类的定义
+* 一般来讲，找到与自己板卡近似的platform文件后，里面的Platform类的定义可以不用修改
 * 一开始的两行为默认时钟名字和频率
 * __init__()函数为platform类的初始化函数,如下图所示：
-  ![]()
-  其中被调用的Xilinx7SeriesPlatform()函数定义如下：
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/__init__().png)
+  其中调用的Xilinx7SeriesPlatform()函数定义如下：
   >https://github.com/enjoy-digital/litex/blob/10dcc736767deb41bb172005631740bdd1fe6d9d/litex/build/xilinx/platform.py
-  Xilinx7SeriesPlatform()函数中有调用 GenericPlatform.__init__()函数，定义如下：
+  
+  Xilinx7SeriesPlatform()函数中调用 GenericPlatform.__init__()函数，定义如下：
   >https://github.com/enjoy-digital/litex/blob/10dcc736767deb41bb172005631740bdd1fe6d9d/litex/build/generic_platform.py
 * create_programmer()函数与烧录、openocd调试有关，在如果指令中含有--load或--flash则在target文件中会被调用因为我们在Window上执行这些操作，所以可以不用管
   下图为create_programmer()在target中被调用的位置：
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/creat_programer().png)
 * do_finalize()，目前没有找到被调用的位置，暂时不知道是干什么用的
+
   下图为Platform类的定义的截图：
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/platform().png)
 
 
   
