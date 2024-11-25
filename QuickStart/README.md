@@ -55,6 +55,8 @@
 
 ### 生成源文件并生成bit流烧录至板卡
   * 将本仓库litex_board_linux中platform/hseda_xc7a35t.py覆盖掉官方仓库中platforms/hseda_xc7a35t.py，同理将本仓库litex_board_linux中targets/hseda_xc7a35t.py覆盖掉官方仓库中targets/hseda_xc7a35t.py
+  * 修改litex_board_linux/boards.py文件，找到该文件中hseda_xc7a35t板卡的支持部分，修改为下（在参数部分加上switches）：
+    ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/boards_add_switches.png)
   * 激活环境
   * cd到官方仓库中linux-on-litex-vexriscv文件夹里
   * 输入以下指令即可开始生成源文件：
