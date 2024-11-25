@@ -146,5 +146,38 @@ platform可以分为2个部分，一个是外设的io引脚声明，另一个就
   下图为Platform类的定义的截图：
   ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/platform().png)
 
+## target初步解析
+target可以分为3个部分，分别为时钟域的定义，Soc的时钟、核、外设的定义，主函数读取参数并调用BaseSoC()和生成剩下的部分外设
+### 时钟域的定义
+* 一般来讲，找到与自己板卡近似的target后这个部分也不需要改什么，需要改的多参考一下官方给定target
+* __init__()传参作用：可以看到__init__()里面由许多参数，这是因为我们在调用该文件生成源文件时可以指定一部分的参数，比如之前使用的--with-video-framebuffer，这使with_video_framebuffer=True，从而生成Video所需要的时钟相关配置，而没有写上去的参数就会等于默认值（多为False），从而不被生成
+* 时钟域的定义也可以分成两个部分，时钟域的定义和时钟管理
+
+  下图为时钟域定义的截图：
+  ![]()
+#### 时钟域的定义
+这个是migen语法，不同的设备会用到不同的时钟域，一下为migen的链接：
+  >https://m-labs.hk/gateware/migen/
+#### 时钟管理
+众所周知，vivado中的时钟管理由PLL和MMCM()，这个部分的编写可以参考其他target
+
+### Soc的时钟、核、外设的定义
+* 一般来讲，找到与自己板卡近似的target后这个部分会修改得比较多，要删除自己不需要的外设，添加自己要的外设（可以参考官方的target，很多都可以直接copy过来直接用）
+* __init__()传参作用：这里的与时钟域的定义中传参作用相同，生成被指定的外设，不生成没有被指定的外设
+
+  下图为Soc的时钟、核、外设的定义的截图：
+  ![]()
+  
+### 主函数读取参数并调用BaseSoC()和生成剩下的部分外设
+* 一般来讲，找到与自己板卡近似的target后这个部分想要根据你改完后的Soc的时钟、核、外设的定义来调整
+  
+  以下为main()函数的截图：
+  ![]()
+* 第一段的传参调用了下面文件的add_target_argument和target_group.add_mutually_exclusive_group方法，add_target_argument可以从外部获取指令并给相应的标志位赋值，需要注意有些外设是冲突的，只能生成其中的一个，而add_mutually_exclusive_group就是用来处理这个的（一般我们输指令的时候也会注意这些冲突项，只生成其中的一个），add_target_argument里面的help后的字符串则是会在-h输出帮助中显示
+  >https://github.com/enjoy-digital/litex/blob/10dcc736767deb41bb172005631740bdd1fe6d9d/litex/build/parser.py
+* 第二部分则是根据收到的参数生成Soc，其中时钟部分的参数传递路径为外部->main->BaseSoc->CRG
+* 第三部分的Builder定义在以下文件中：
+  >https://github.com/enjoy-digital/litex/blob/10dcc736767deb41bb172005631740bdd1fe6d9d/litex/soc/integration/builder.py
+* 最后则是--build、--load --flash等参数发挥作用的地方，因为这个部分我们是在Window上操作的，所以用不到
 
   
