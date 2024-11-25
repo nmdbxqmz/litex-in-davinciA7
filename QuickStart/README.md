@@ -1,5 +1,5 @@
 # 说明
-* 一般来说，直接魔改官方给的litex_boards/platforms、litex_boards/targets文件夹中的.py文件最快，官方给了很多支持的板卡，大家可以选择和自己手上有的板卡最相似的板卡文件进行魔改，这里给的示例是魔改了官方的hseda_xc7a35t板卡
+* 一般来说，直接魔改官方给的litex_boards/platforms、litex_boards/targets文件夹中的.py文件最快，官方给了很多支持的板卡，大家可以选择和自己手上有的板卡最相似的板卡文件进行魔改，这里给的示例是魔改了官方的hseda_xc7a35t板卡（外设少，改起来快）
 * 有2种生成方式，一种是在litex_boards/boards/里运行.py文件，生成的源文件是不支持跑liunx的，另一种是在linux-on-litex-vexriscv/里运行make.py，生成的源文件支持跑linux
   
 ## 本仓库示例中虚拟机所使用的目录结构
