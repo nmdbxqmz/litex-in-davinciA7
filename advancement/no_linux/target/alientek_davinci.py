@@ -80,7 +80,6 @@ class BaseSoC(SoCCore):
         eth_ip          = "192.168.1.50",
         remote_ip       = None,
         eth_dynamic_ip  = False,
-        with_buttons    = True,
         with_gpio       = False,
 	with_video_framebuffer = False,
         with_video_terminal    = False,
@@ -115,28 +114,11 @@ class BaseSoC(SoCCore):
                 sys_clk_freq = sys_clk_freq,
             )
 		
-        # Buttons ----------------------------------------------------------------------------------
-        if with_buttons:
-            self.buttons = GPIOIn(
-                pads     = platform.request_all("user_btn"),
-                with_irq = self.irq.enabled
-            )
-
         # GPIOs ------------------------------------------------------------------------------------
         if with_gpio:
             platform.add_extension(alientek_davinci.raw_j2())
             self.gpio = GPIOTristate(
                 pads     = platform.request("J2"),
-                with_irq = self.irq.enabled
-            )
-        # gpio use for test
-        self.gpio = GPIOTristate(
-                pads     = platform.request("gpio0"),
-                with_irq = self.irq.enabled
-            )
-
-        self.gpio = GPIOTristate(
-                pads     = platform.request("gpio1"),
                 with_irq = self.irq.enabled
             )
 
@@ -151,7 +133,7 @@ class BaseSoC(SoCCore):
             "v_blanking"    : 45,
             "v_sync_offset" : 22,
             "v_sync_width"  : 1,})
-        if with_video_terminal or with_video_framebuffer:
+        if with_video_terminal or with_video_framebuffer or with_video_colorbars:
             self.videophy = VideoVGAPHY(platform.request("lcd"), clock_domain="dvi")
             if with_video_terminal:
                 self.add_video_terminal(phy=self.videophy, timings=video_timings, clock_domain="dvi")
@@ -201,7 +183,6 @@ def main():
         eth_ip         = args.eth_ip,
         remote_ip      = args.remote_ip,
         eth_dynamic_ip = args.eth_dynamic_ip,
-	with_buttons   = True,
         with_gpio      = args.with_gpio,
 	with_video_terminal    = args.with_video_terminal,
         with_video_framebuffer = args.with_video_framebuffer,
