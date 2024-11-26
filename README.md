@@ -23,6 +23,8 @@
     ```
     sudo apt install ninja curl build-essential device-tree-compiler wget git python3-setuptools 
     ```
+* 上述操作报错：E:无法定位软件包 ninja 的可以参考以下的文档来安装ninja
+  >https://blog.csdn.net/dongfangxiaozi_/article/details/126850028
 
 ### 安装python3环境：
 * 安装python3
