@@ -68,9 +68,9 @@
   chmod +x litex_master/litex_setup.py
   python3 litex_master/litex_setup.py --init --install
   ```
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/litex_setup_reject.png)
 * 在litex_setup.py运行时可能会出现如下图所示的报错说无法访问，可以多执行几次`python3 litex_setup.py --init --install`，一般多试几次就成功访问然后程序继续往下执行，一直重复这个指令到litex_setup.py全部运行完成：
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/setup_error.png)
 * 运行后再update一下，不然后面运行make时可能会报错
     ```
     python3 litex_setup.py --update
