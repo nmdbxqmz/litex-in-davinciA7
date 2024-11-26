@@ -21,9 +21,7 @@
 ### apt安装部分需要的软件
 * 直接在任意位置打开终端执行以下指令即可：
     ```
-    sudo apt install ninja
-    sudo apt install curl
-    sudo apt install build-essential device-tree-compiler wget git python3-setuptools 
+    sudo apt install ninja curl build-essential device-tree-compiler wget git python3-setuptools 
     ```
 
 ### 安装python3环境：
@@ -55,7 +53,7 @@
     ```
     wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
     chmod +x litex_setup.py
-    python3 litex_setup.py --init --install
+    ./litex_setup.py --init --install
     ```
     如果不使用虚拟环境去运行.py文件会可能会报错误，下图为运行python3 litex_setup.py --init --install时报的错误：
     ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/litex_setup_error.png)
@@ -66,18 +64,18 @@
   >https://github.com/enjoy-digital/litex
   ```
   chmod +x litex_master/litex_setup.py
-  python3 litex_master/litex_setup.py --init --install
+  ./litex_master/litex_setup.py --init --install
   ```
   ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/litex_setup_reject.png)
-* 在litex_setup.py运行时可能会出现如下图所示的报错说无法访问，可以多执行几次`python3 litex_setup.py --init --install`，一般多试几次就成功访问然后程序继续往下执行，一直重复这个指令到litex_setup.py全部运行完成：
+* 在litex_setup.py运行时可能会出现如下图所示的报错说无法访问，可以多执行几次`./litex_setup.py --init --install`，一般多试几次就成功访问然后程序继续往下执行，一直重复这个指令到litex_setup.py全部运行完成：
   ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/setup_error.png)
 * 运行后再update一下，不然后面运行make时可能会报错
     ```
-    python3 litex_setup.py --update
+   ./litex_setup.py --update
     ```
 * 最后执行
   ```
-  sduo  python3 litex_setup.py --gcc=riscv
+  sudo ./litex_setup.py --gcc=riscv
   ```
 
 ### 安装gcc riscv 工具链
@@ -109,11 +107,11 @@
   ```
   source "/home/lc/.sdkman/bin/sdkman-init.sh"
   ```
-* 用sdkman安装jdk（很慢，大概半小时左右才能下完）
+* 用sdkman安装jdk（比较慢）
     ```
     sdk install java $(sdk list java | grep -o "\b8\.[0-9]*\.[0-9]*\-tem" | head -1)
     ```
-* 用sdkman安装sbt（也很慢，大概半小时左右才能下完）
+* 用sdkman安装sbt（也比较慢）
     ```
     sdk install sbt
     ```
