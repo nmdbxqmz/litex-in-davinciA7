@@ -71,6 +71,7 @@
         })
 
   ```
+  如果把"video_colorbars"注释掉，选择"framebuffer"或"video_terminal"则不需要修改linux-on-litex-vexriscv/make.py文件
   ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/boards_change.png)
 * 或将本仓库no_linux中make.py和boards.py直接覆盖官方仓库中的make.py和boards.py，与上面的两步等效
 * 激活环境
