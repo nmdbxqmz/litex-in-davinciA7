@@ -191,7 +191,7 @@ make.py的文件地址：
 
 我们再看一下boards.py，如下图所示为是一般板子的书写格式，如果没有相应的board则会报错，这就是为什么在with_linux中需要手动往boards.py添加相应board的原因了，其中在Board.__init__中还有soc_capabilities这个参数，有什么用呢？我们再往下看
 
-boards.py地址 >https://github.com/litex-hub/linux-on-litex-vexriscv/blob/69545456c5ccfbc88973107d64c1b7097c9f4c9b/boards.py#L19
+boards.py地址 >https://github.com/litex-hub/linux-on-litex-vexriscv/blob/69545456c5ccfbc88973107d64c1b7097c9f4c9b/boards.py
 
 ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/boards_support.png)
 
