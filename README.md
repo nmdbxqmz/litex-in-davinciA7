@@ -173,8 +173,7 @@
     ```
 * 如果环境安装成功，文件会生成在 linux-on-litex-vexriscv/buid/arty 目录里
 下面为示例图片：
-    ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/make_success.png)
-
+    ![]()
 ### 运行仿真
 * 下载仿真所需要的镜像文件，以下为下载地址，下载其中的liunx_2022_03_23.zip这个文件
     >https://github.com/litex-hub/linux-on-litex-vexriscv/issues/164
