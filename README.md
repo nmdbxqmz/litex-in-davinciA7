@@ -17,10 +17,18 @@
 * 视频参考：
 >https://www.bilibili.com/video/BV1qd4y1V7y3/?spm_id_from=333.337.search-card.all.click&vd_source=a29c870e10911c3164efd99cf889c405
 
+
+### apt安装部分需要的软件
+* 直接在任意位置打开终端执行以下指令即可：
+    ```
+    sudo apt install ninja
+    sudo apt install curl
+    sudo apt install build-essential device-tree-compiler wget git python3-setuptools 
+    ```
+
 ### 安装python3环境：
 * 安装python3
     ```
-    sudo apt install build-essential device-tree-compiler wget git python3-setuptools 
     sudo apt install python3-full
     ```
 * 选择一个位置创建一个文件夹venv（也可以自己随便取一个），然后在该位置打开终端用下面的命令在venv文件夹里创建虚拟环境（不用虚拟环境的话运行.py文件可能会报错）
@@ -38,12 +46,6 @@
     pip3 install meson
     ```
     
-### 安装ninja软件
-* 直接在任意位置打开终端执行以下指令即可：
-    ```
-    sudo apt install ninja
-    ```
-
 ### 克隆git仓库：
 * 首先在python3虚拟环境venv下创建一个文件夹litex（方便管理），然后cd到该文件夹内运行下面的指令
     ```
@@ -60,10 +62,23 @@
 
     想要了解一下报错信息的可以参考一下这篇CSDN文章：
     >https://blog.csdn.net/qq_25439417/article/details/139485697
+* 有的时候`wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py`会如下图所示报错说拒绝访问，可以从下面链接下载zip，解压后放到venv/litex里,此时指令变更如下,后面涉及到litex_setup.py的指令更改也是如此：
+  >https://github.com/enjoy-digital/litex
+  ```
+  chmod +x litex_master/litex_setup.py
+  python3 litex_master/litex_setup.py --init --install
+  ```
+  ![]()
+* 在litex_setup.py运行时可能会出现如下图所示的报错说无法访问，可以多执行几次`python3 litex_setup.py --init --install`，一般多试几次就成功访问然后程序继续往下执行，一直重复这个指令到litex_setup.py全部运行完成：
+  ![]()
 * 运行后再update一下，不然后面运行make时可能会报错
     ```
     python3 litex_setup.py --update
     ```
+* 最后执行
+  ```
+  sduo  python3 litex_setup.py --gcc=riscv
+  ```
 
 ### 安装gcc riscv 工具链
 * 下载工具链，也可以在windows上从以下地址选择合适版本下载后移到虚拟机上（解压和添加路径命令中的“riscv64-unknown-elf-gcc-8.1.0-2019.01.0-x86_64-linux-ubuntu14”需要根据你实际下载的版本进行修改）
@@ -90,6 +105,10 @@
     ```
     rm -rf ~/.sdkman
     ```
+* 输入以下指令来激活sdkman环境：
+  ```
+  source "/home/lc/.sdkman/bin/sdkman-init.sh"
+  ```
 * 用sdkman安装jdk（很慢，大概半小时左右才能下完）
     ```
     sdk install java $(sdk list java | grep -o "\b8\.[0-9]*\.[0-9]*\-tem" | head -1)
