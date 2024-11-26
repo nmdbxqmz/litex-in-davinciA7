@@ -122,7 +122,7 @@
 
 * 安装依赖软件
     ```
-    sudo apt-get install git make autoconf g++ flex bison libz-dev
+    sudo apt-get install git make autoconf g++ flex bison libz-dev help2man
     ```
 * 克隆verilator仓库
     ```
