@@ -3,12 +3,12 @@
 * 此readme为进阶教程，建议先看快速入门，在快速入门中有讲过的内容在这个readme中会略讲，litex老玩家直接忽略这句话
 
 ## readme目录结构
-* no_linux使用教程
-* with_linux使用教程
-* 官方仓库中需要经常浏览（对使用者较为重要）的文件
-* platform初步解析
-* target初步解析
-* make.py初步解析（运行后能生成可以运行liunx的源文件）
+* [no_linux使用教程](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/advancement#no_linux%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)
+* [with_linux使用教程](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/advancement#with_linux%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B)
+* [官方仓库中需要经常浏览（对使用者较为重要）的文件](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/advancement#%E5%AE%98%E6%96%B9%E4%BB%93%E5%BA%93%E4%B8%AD%E9%9C%80%E8%A6%81%E7%BB%8F%E5%B8%B8%E6%B5%8F%E8%A7%88%E5%AF%B9%E4%BD%BF%E7%94%A8%E8%80%85%E8%BE%83%E4%B8%BA%E9%87%8D%E8%A6%81%E7%9A%84%E6%96%87%E4%BB%B6)
+* [platform初步解析](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/advancement#platform%E5%88%9D%E6%AD%A5%E8%A7%A3%E6%9E%90)
+* [target初步解析](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/advancement#target%E5%88%9D%E6%AD%A5%E8%A7%A3%E6%9E%90)
+* [make.py初步解析](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/advancement#makepy%E5%88%9D%E6%AD%A5%E8%A7%A3%E6%9E%90)（运行后能生成可以运行liunx的源文件）
 
 ## no_linux使用教程
 * 将本仓库no_linux中platform/hseda_xc7a35t.py覆盖掉官方仓库中platforms/hseda_xc7a35t.py，同理将本仓库no_linux中targets/hseda_xc7a35t.py覆盖掉官方仓库中targets/hseda_xc7a35t.py
