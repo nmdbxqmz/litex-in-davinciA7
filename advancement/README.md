@@ -24,7 +24,9 @@
   ```
 * 生成的源文件一般会在venv/litex/build/davinci中，有时也可能在venv/litex/litex-boards/litex_boards/targets/build/davinci中
 * 将build/davinci/gateware中的文件全部拷贝到你PFGA项目的rtl中,同时也要拷贝venv/litex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv.v文件到rtl中
-* 修改davinci.c和davinci.xdc如下图所示，因为lcd的bl引脚官方给的函数不支持，所以要手动添加并上拉：
+* 注意：如下图所示，gateware其中的.init文件在.v文件中被读取，并被一起烧录到板卡上，每次更改配置后，生成的.init文件也会改变，所以每次更改配置并生成后，.init文件要用新生成的
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/init_read.png)
+* 修改davinci.c和davinci.xdc如下图所示，因为lcd的bl引脚官方给的函数不支持，所以要手动添加并上拉（如果没有添加--with-video-framebuffer，即没有生成lcd外设，此步骤不用做）：
 
   davinci.c修改如下，在模块声明中添加output wire lcd_bl：
   ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/.v_add.png)
@@ -86,7 +88,9 @@
 * 生成的源文件一般会在linux-on-litex-vexriscv/build/davinci中
 * 将build/davinci/gateware中的文件全部拷贝到你PFGA项目的rtl中，同时也要拷贝venv/litex/pythondata-cpu-vexriscv-smp/pythondata_cpu_vexriscv_smp/verilog/Ram_1w_1rs_Generic.v文件
   和venv/litex/pythondata-cpu-vexriscv-smp/pythondata_cpu_vexriscv_smp/verilog/VexRiscvLitexSmpCluster_Cc1_Iw32Is4096Iy1_Dw32Ds4096Dy1_ITs4DTs4_Ldw128_Ood_Hb1.v文件到rtl中
-* 修改davinci.c和davinci.xdc如下图所示，因为lcd的bl引脚官方给的函数不支持，所以要手动添加并上拉：
+* 注意：如下图所示，gateware其中的.init文件在.v文件中被读取，并被一起烧录到板卡上，每次更改配置后，生成的.init文件也会改变，所以每次更改配置并生成后，.init文件要用新生成的
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/init_read.png)
+* 修改davinci.c和davinci.xdc如下图所示，因为lcd的bl引脚官方给的函数不支持，所以要手动添加并上拉（如果注释了"video_colorbars"并且没有启用"framebuffer"和"video_terminal",，即没有生成lcd外设，此步骤不用做）：
 
   davinci.c修改如下，在模块声明中添加output wire lcd_bl：
   ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/.v_add.png)
@@ -99,7 +103,7 @@
   ```
   ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/advancement/xdc_add.png)
   
-* 启动window中的vivado，将.v和.xdc全部添加进来，选择对应的板卡型号，生成bit流烧入进板卡，此时可以看到lcd屏显示彩条
+* 启动window中的vivado，将.v和.xdc全部添加进来，选择对应的板卡型号，生成bit流烧入进板卡，此时可以看到lcd屏显示彩条（video_terminal为将板卡通过串口输出的信息同步显示到lcd上）
 * 剩下步骤与快速入门一致，这里不过多赘述了
 * 还有一件事，不知道为什么当主频为100M时，波特率变成了57600（115200的一半），开串口助手时记得修改波特率为57600
   
