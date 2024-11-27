@@ -13,7 +13,7 @@
   >https://github.com/enjoy-digital/litex/tree/10dcc736767deb41bb172005631740bdd1fe6d9d/litex/soc/software
 
   ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/common_make.png)
-* 进入到demo文件夹内，输入以下指令就会开始编译了，如果没有安装相关编译工具安装一下即可：
+* 进入到demo文件夹内，输入以下指令就会开始编译了(如果没有安装相关编译工具安装一下即可)：
   ```
   make
   ```
@@ -23,3 +23,4 @@
   它会指示Soc将左边的文件写入右边的地址中，并从最后一个地址开始运行，底下注释的部分即为载入linux时的boot.json的编写
   
     ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/boot_json.png)
+* 说明一下，如果板卡上电没有读取到任何程序，那么就会运行默认程序bios.bin，在software中的bios文件夹中可以看到，可能是被写入到了rom.init文件中，烧录时被一起传进去了
