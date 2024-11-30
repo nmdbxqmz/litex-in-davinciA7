@@ -40,14 +40,29 @@ _io = [
         IOStandard("LVCMOS33")
     ),
 
-	# I2C
+    # USB FIFO
+    ("usb_clk", 0, Pins("Y4"), IOStandard("LVCMOS33")),
+    ("usb_fifo", 0, # Can be used when FT232H's Channel is configured to ASYNC FIFO 245 mode
+        Subsignal("data",  Pins("AB5 AA4 AB3 AA3 AB2 AB1 AA1 Y1")),
+        Subsignal("rxf_n", Pins("W1")),
+        Subsignal("txe_n", Pins("AA5")),
+        Subsignal("rd_n",  Pins("V4")),
+        Subsignal("wr_n",  Pins("Y3")),
+        Subsignal("siwua", Pins("V3")),
+        Subsignal("oe_n",  Pins("U3")),
+        Misc("SLEW=FAST"),
+        Drive(8),
+        IOStandard("LVCMOS33"),
+    ),
+
+    # I2C
     ("i2c", 0,
         Subsignal("scl", Pins("R6")),
         Subsignal("sda", Pins("T4")),
         IOStandard("LVCMOS33"),
     ),
 	
-	# SDCard
+    # SDCard
     ("sdcard", 0,
         Subsignal("data", Pins("W6 Y6 U6 W4"),),
         Subsignal("cmd",  Pins("W5"),),
@@ -78,7 +93,7 @@ _io = [
 		Misc("SLEW=FAST"),
     ),
 	
-	# RGB TFT-LCD
+    # RGB TFT-LCD
     ("lcd", 0,
         Subsignal("rst",  		Pins("W7")),
         #Subsignal("bl",    	Pins("V7")),
@@ -92,7 +107,7 @@ _io = [
         IOStandard("LVCMOS33")
     ),
 	
-	# RGMII Ethernet
+    # RGMII Ethernet
     ("eth_clocks", 0,
         Subsignal("tx", Pins("AA21")),
         Subsignal("rx", Pins("W19")),
