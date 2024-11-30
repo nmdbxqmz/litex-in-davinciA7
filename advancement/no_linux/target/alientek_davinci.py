@@ -151,7 +151,7 @@ class BaseSoC(SoCCore):
             "v_blanking"    : 45,
             "v_sync_offset" : 22,
             "v_sync_width"  : 1,})
-        if with_video_terminal or with_video_framebuffer:
+        if with_video_terminal or with_video_framebuffer or with_video_colorbars:
             self.videophy = VideoVGAPHY(platform.request("lcd"), clock_domain="dvi")
             if with_video_terminal:
                 self.add_video_terminal(phy=self.videophy, timings=video_timings, clock_domain="dvi")
