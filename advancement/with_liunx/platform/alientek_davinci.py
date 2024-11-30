@@ -38,7 +38,7 @@ _io = [
 
     # USB FIFO
     ("usb_clk", 0, Pins("Y4"), IOStandard("LVCMOS33")),
-    ("usb_fifo", 0, # Can be used when FT232H's Channel is configured to ASYNC FIFO 245 mode
+    ("usb_fifo", 0, 
         Subsignal("data",  Pins("AB5 AA4 AB3 AA3 AB2 AB1 AA1 Y1")),
         Subsignal("rxf_n", Pins("W1")),
         Subsignal("txe_n", Pins("AA5")),
