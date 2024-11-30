@@ -22,12 +22,16 @@ _io = [
     ("user_led", 1, Pins("R3"),  IOStandard("LVCMOS33")),
     ("user_led", 2, Pins("V2"),  IOStandard("LVCMOS33")),
     ("user_led", 3, Pins("Y2"),  IOStandard("LVCMOS33")),
+
+    # GPIO
+    ("gpio0", 0, Pins("Y8"),  IOStandard("LVCMOS33")),
+    ("gpio1", 0, Pins("AB8"),  IOStandard("LVCMOS33")),
 	
-    # Switches(Buttons)
-    ("user_sw", 0, Pins("T1"), IOStandard("LVCMOS33")),
-    ("user_sw", 1, Pins("U1"), IOStandard("LVCMOS33")),
-    ("user_sw", 2, Pins("W2"), IOStandard("LVCMOS33")),
-    ("user_sw", 3, Pins("T3"), IOStandard("LVCMOS33")),
+    # Buttons
+    ("user_btn", 0, Pins("T1"), IOStandard("LVCMOS33")),
+    ("user_btn", 1, Pins("U1"), IOStandard("LVCMOS33")),
+    ("user_btn", 2, Pins("W2"), IOStandard("LVCMOS33")),
+    ("user_btn", 3, Pins("T3"), IOStandard("LVCMOS33")),
 	
     # Serial
     ("serial", 0,
