@@ -16,11 +16,11 @@
 * cd到官方仓库中targets文件夹里
 * 输入以下指令即可开始生成源文件：
   ```
-  python3 hseda_xc7a35t.py --with-sdcard --with-buttons --build
+  python3 alientek_davinci.py --with-sdcard --with-video-framebuffer --build
   ```
 * 或直接在桌面上启动的终端中运行以下指令,与上面的两步等效：
   ```
-  python3 venv/litex/litex-boards/litex_boards/tagets/hseda_xc7a35t.py --with-sdcard --with-video-framebuffer --build
+  python3 venv/litex/litex-boards/litex_boards/tagets/alientek_davinci.py --with-sdcard --with-video-framebuffer --build
   ```
 * 生成的源文件一般会在venv/litex/build/davinci中，有时也可能在venv/litex/litex-boards/litex_boards/targets/build/davinci中
 * 将build/davinci/gateware中的文件全部拷贝到你PFGA项目的rtl中,同时也要拷贝venv/litex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv.v文件到rtl中
