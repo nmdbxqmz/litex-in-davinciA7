@@ -36,14 +36,29 @@ _io = [
         IOStandard("LVCMOS33")
     ),
 
-	# I2C
+    # USB FIFO
+    ("usb_clk", 0, Pins("Y4"), IOStandard("LVCMOS33")),
+    ("usb_fifo", 0, # Can be used when FT232H's Channel is configured to ASYNC FIFO 245 mode
+        Subsignal("data",  Pins("AB5 AA4 AB3 AA3 AB2 AB1 AA1 Y1")),
+        Subsignal("rxf_n", Pins("W1")),
+        Subsignal("txe_n", Pins("AA5")),
+        Subsignal("rd_n",  Pins("V4")),
+        Subsignal("wr_n",  Pins("Y3")),
+        Subsignal("siwua", Pins("V3")),
+        Subsignal("oe_n",  Pins("U3")),
+        Misc("SLEW=FAST"),
+        Drive(8),
+        IOStandard("LVCMOS33"),
+    ),
+
+    # I2C
     ("i2c", 0,
         Subsignal("scl", Pins("R6")),
         Subsignal("sda", Pins("T4")),
         IOStandard("LVCMOS33"),
     ),
 	
-	# SDCard
+    # SDCard
     ("sdcard", 0,
         Subsignal("data", Pins("W6 Y6 U6 W4"),),
         Subsignal("cmd",  Pins("W5"),),
@@ -71,24 +86,24 @@ _io = [
         Subsignal("cke",   Pins("K4"), IOStandard("SSTL15")),
         Subsignal("odt",   Pins("P1"), IOStandard("SSTL15")),
         Subsignal("reset_n", Pins("F4"), IOStandard("SSTL15")),
-		Misc("SLEW=FAST"),
+	Misc("SLEW=FAST"),
     ),
 	
-	# RGB TFT-LCD
+    # RGB TFT-LCD
     ("lcd", 0,
-        Subsignal("rst",  		Pins("W7")),
+        Subsignal("rst",  	Pins("W7")),
         #Subsignal("bl",    	Pins("V7")),
-        Subsignal("clk",   		Pins("Y9")),
-        Subsignal("de",    		Pins("AB7")),
+        Subsignal("clk",   	Pins("Y9")),
+        Subsignal("de",    	Pins("AB7")),
         Subsignal("hsync_n", 	Pins("V8")),
         Subsignal("vsync_n", 	Pins("U7")),
-        Subsignal("b",    		Pins("R16 P15 R14 P14 N14 N13 V9 W9")),
-        Subsignal("g",     		Pins("U18 U17 V19 T18 V20 R18 N17 P17 ")),
-        Subsignal("r",     		Pins("AB18 AA18 Y19 Y18 W20 W17 V18 V17")),
+        Subsignal("b",    	Pins("R16 P15 R14 P14 N14 N13 V9 W9")),
+        Subsignal("g",     	Pins("U18 U17 V19 T18 V20 R18 N17 P17 ")),
+        Subsignal("r",     	Pins("AB18 AA18 Y19 Y18 W20 W17 V18 V17")),
         IOStandard("LVCMOS33")
     ),
 	
-	# RGMII Ethernet
+    # RGMII Ethernet
     ("eth_clocks", 0,
         Subsignal("tx", Pins("AA21")),
         Subsignal("rx", Pins("W19")),
@@ -117,7 +132,7 @@ _connectors = [
         9: "L15",   10: "M15",
         11: "J17",  12: "L14",
         13: "K18",  14: "K17",
-        15: "H19", 	16: "K19",
+        15: "H19",  16: "K19",
         17: "F20",  18: "J19",
         19: "K16",  20: "F19",
         21: "L20",  22: "L16",
@@ -128,13 +143,13 @@ _connectors = [
         31: "G20",  32: "J20",
         33: "L18",  34: "M18",
         35: "F21",  36: "F18",
-		37: "E17",  38: "D17",
+	37: "E17",  38: "D17",
         39: "N22",  40: "M22",
         41: "M21",  42: "L21",
         43: "K22",  44: "K21",
         45: "J22",  46: "H22",
         47: "G22",  48: "G21",
-		49: "E19",  50: "D19",
+	49: "E19",  50: "D19",
     }),
 ]
 
