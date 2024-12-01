@@ -121,6 +121,7 @@ class BaseSoC(SoCCore):
                 pads     = platform.request_all("user_btn"),
                 with_irq = self.irq.enabled
             )
+	self.irq.add(buttons)
 
         # GPIOs ------------------------------------------------------------------------------------
         if with_gpio:
@@ -130,12 +131,12 @@ class BaseSoC(SoCCore):
                 with_irq = self.irq.enabled
             )
         # gpio use for test
-        self.gpio = GPIOTristate(
+        self.gpio0 = GPIOTristate(
                 pads     = platform.request("gpio0"),
                 with_irq = self.irq.enabled
             )
 
-        self.gpio = GPIOTristate(
+        self.gpio1 = GPIOTristate(
                 pads     = platform.request("gpio1"),
                 with_irq = self.irq.enabled
             )
