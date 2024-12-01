@@ -10,7 +10,7 @@ set_msg_config -id {Common 17-55} -new_severity {Warning}
 # Add Sources
 
 read_verilog {/home/lc/桌面/venv/litex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv.v}
-read_verilog {/home/lc/桌面/venv/litex/build/alientek_davinci/gateware/alientek_davinci.v}
+read_verilog {/home/lc/桌面/venv/litex/litex-boards/litex_boards/targets/build/alientek_davinci/gateware/alientek_davinci.v}
 
 # Add EDIFs
 

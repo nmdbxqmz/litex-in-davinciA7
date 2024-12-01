@@ -235,12 +235,14 @@ int main(void)
 	irq_attach(BUTTONS_INTERRUPT,isr_handler);
 	irq_setie(1);
 	#endif
+	#gpio写使能
 	gpio0_oe_write(0x01);
 	gpio1_oe_write(0x01);
+	#按钮中断模式甚至
 	buttons_mode_write(0x00);
 	buttons_edge_write(0x00);
 	buttons_ev_pending_write(0x0f);
-	
+	#按钮中断使能
 	buttons_ev_enable_write(0x0f);
 	buttons_ev_pending_write(0x0f);
 	

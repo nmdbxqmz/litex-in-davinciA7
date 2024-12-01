@@ -186,7 +186,7 @@ def main():
         with_gpio      = args.with_gpio,
 	with_video_terminal    = args.with_video_terminal,
         with_video_framebuffer = args.with_video_framebuffer,
-		with_video_colorbars = args.with_video_colorbars,
+	with_video_colorbars = args.with_video_colorbars,
         **parser.soc_argdict
     )
 

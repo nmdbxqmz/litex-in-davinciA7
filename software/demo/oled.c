@@ -364,12 +364,14 @@ const uint8_t OLED_F6x8[][6] =
 	{0x00,0x00,0x41,0x7F,0x08,0x00},// } 93
 	{0x00,0x08,0x04,0x08,0x10,0x08},// ~ 94
 };
+
 void OLED_W_SCL(uint8_t BitValue);
 void OLED_W_SCL(uint8_t BitValue)
 {
 	gpio0_out_write(BitValue);
 	busy_wait_us(1);
 }
+
 void OLED_W_SDA(uint8_t BitValue);
 void OLED_W_SDA(uint8_t BitValue)
 {
@@ -377,6 +379,7 @@ void OLED_W_SDA(uint8_t BitValue)
 	busy_wait_us(1);
 
 }
+
 void OLED_I2C_Start(void);
 void OLED_I2C_Start(void)
 {
@@ -385,6 +388,7 @@ void OLED_I2C_Start(void)
 	OLED_W_SDA(0);		//在SCL高电平期间，拉低SDA，产生起始信号
 	OLED_W_SCL(0);		//起始后把SCL也拉低，即为了占用总线，也为了方便总线时序的拼接
 }
+
 void OLED_I2C_Stop(void);
 void OLED_I2C_Stop(void)
 {
@@ -392,6 +396,7 @@ void OLED_I2C_Stop(void)
 	OLED_W_SCL(1);		//释放SCL，使SCL呈现高电平
 	OLED_W_SDA(1);		//在SCL高电平期间，释放SDA，产生终止信号
 }
+
 void OLED_I2C_SendByte(uint8_t Byte);
 void OLED_I2C_SendByte(uint8_t Byte)
 {
@@ -410,6 +415,7 @@ void OLED_I2C_SendByte(uint8_t Byte)
 	OLED_W_SCL(1);		//额外的一个时钟，不处理应答信号
 	OLED_W_SCL(0);
 }
+
 void OLED_WriteCommand(uint8_t Command);
 void OLED_WriteCommand(uint8_t Command)
 {
@@ -419,6 +425,7 @@ void OLED_WriteCommand(uint8_t Command)
 	OLED_I2C_SendByte(Command);		//写入指定的命令
 	OLED_I2C_Stop();				//I2C终止
 }
+
 void OLED_WriteData(uint8_t *Data, uint8_t Count);
 void OLED_WriteData(uint8_t *Data, uint8_t Count)
 {
@@ -434,6 +441,7 @@ void OLED_WriteData(uint8_t *Data, uint8_t Count)
 	}
 	OLED_I2C_Stop();				//I2C终止
 }
+
 void OLED_GPIO_Init(void);
 void OLED_GPIO_Init(void)
 {
@@ -448,6 +456,7 @@ void OLED_GPIO_Init(void)
 	OLED_W_SCL(1);
 	OLED_W_SDA(1);
 }
+
 void OLED_Init(void);
 void OLED_Init(void)
 {
@@ -491,6 +500,7 @@ void OLED_Init(void)
 
 	OLED_WriteCommand(0xAF);	//开启显示
 }
+
 void OLED_SetCursor(uint8_t Page, uint8_t X);
 void OLED_SetCursor(uint8_t Page, uint8_t X)
 {
@@ -505,6 +515,7 @@ void OLED_SetCursor(uint8_t Page, uint8_t X)
 	OLED_WriteCommand(0x10 | ((X & 0xF0) >> 4));	//设置X位置高4位
 	OLED_WriteCommand(0x00 | (X & 0x0F));			//设置X位置低4位
 }
+
 void OLED_Update(void);
 void OLED_Update(void)
 {
@@ -518,6 +529,7 @@ void OLED_Update(void)
 		OLED_WriteData(OLED_DisplayBuf[j], 128);
 	}
 }
+
 void OLED_ClearArea(uint8_t X, uint8_t Y, uint8_t Width, uint8_t Height);
 void OLED_ClearArea(uint8_t X, uint8_t Y, uint8_t Width, uint8_t Height)
 {
@@ -537,6 +549,7 @@ void OLED_ClearArea(uint8_t X, uint8_t Y, uint8_t Width, uint8_t Height)
 		}
 	}
 }
+
 void OLED_ShowImage(uint8_t X, uint8_t Y, uint8_t Width, uint8_t Height, const uint8_t *Image);
 void OLED_ShowImage(uint8_t X, uint8_t Y, uint8_t Width, uint8_t Height, const uint8_t *Image)
 {
@@ -572,6 +585,7 @@ void OLED_ShowImage(uint8_t X, uint8_t Y, uint8_t Width, uint8_t Height, const u
 		}
 	}
 }
+
 void OLED_ShowChar(uint8_t X, uint8_t Y, char Char, uint8_t FontSize);
 void OLED_ShowChar(uint8_t X, uint8_t Y, char Char, uint8_t FontSize)
 {
@@ -586,6 +600,7 @@ void OLED_ShowChar(uint8_t X, uint8_t Y, char Char, uint8_t FontSize)
 		OLED_ShowImage(X, Y, 6, 8, OLED_F6x8[Char - ' ']);
 	}
 }
+
 void OLED_ShowString(uint8_t X, uint8_t Y, char *String, uint8_t FontSize);
 void OLED_ShowString(uint8_t X, uint8_t Y, char *String, uint8_t FontSize)
 {

@@ -84,7 +84,7 @@ class BaseSoC(SoCCore):
         with_gpio       = False,
 	with_video_framebuffer = False,
         with_video_terminal    = False,
-		with_video_colorbars = False,
+	with_video_colorbars = False,
         **kwargs):
         platform = alientek_davinci.Platform(variant=variant, toolchain=toolchain)
 
@@ -121,7 +121,7 @@ class BaseSoC(SoCCore):
                 pads     = platform.request_all("user_btn"),
                 with_irq = self.irq.enabled
             )
-		self.irq.add(buttons)
+	self.irq.add(buttons)
 
         # GPIOs ------------------------------------------------------------------------------------
         if with_gpio:
@@ -206,7 +206,7 @@ def main():
         with_gpio      = args.with_gpio,
 	with_video_terminal    = args.with_video_terminal,
         with_video_framebuffer = args.with_video_framebuffer,
-		with_video_colorbars = args.with_video_colorbars,
+	with_video_colorbars = args.with_video_colorbars,
         **parser.soc_argdict
     )
 
