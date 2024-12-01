@@ -46,6 +46,7 @@
 * 接着如果其中的某个函数需要被其他文件引用，以main.c为例，需要在main.c中用extern来引入该函数，如下图所示：
   ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/extern.png)
 * 最后，如下图所示：在makefile中'OBJECTS='这行加上你写的c文件的名称，文件后缀为.o，如本例的加的c文件叫oled.c，则此处加的为oled.o:
+
   ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/OBJECT_ADD.png)
 
 ## 如何生成Bin文件
@@ -129,23 +130,23 @@
   
 ### 单个GPIO
   * 单个GPIO即使用同个名字的pin只有一个的情况，advancement/no_linux中的gpio0和gpio1就是这种情况，如下图所示：
-    ![]()
+    ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/single_gpio.png)
   * 使用上面的函数的时候，参数填0、1即可
     
 ### 多个GPIO
   * 多个GPIO即使用同个名字的pin有多个的情况，advancement/no_linux中的gbuttons就是这种情况，如下图所示：
-    ![]()
+    ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/multi_gpio.png)
   * 这种情况下为同名的所有的GPIO共用这些函数，用二进制解释好理解一些，参数的每一bit对应相应的GPIO，顺序为左高右低，，比如有4个button，对应的序号为3、2、1、0，我想使能2和0的写使能，则应该在2、0对应的位上写1，其余的写0，即0101，对应16进制位0x05，此时写使能函数写位位`gpio0_oe_write(0x05)`
     
 ## 外设中断的使用
 * 这里以启用buttons的中断为例，按下按钮进入中断，打印进入中断的总次数，并点亮与按钮对应位上的led
 ### 设置外设的中断配置，如下图所示，设置4个button都为边沿触发，边沿为上升沿，使能中断并清除中断标志位
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/buttons_en.png)
   
 ### 编写中断处理函数（isr_handler），如下图所示，当系统进入中断后会判断是否为按钮中断，如果是按钮中断则进入对应的if中执行，下例中，如果按下按钮2，则`buttons_ev_pending_read()`返回值为4，此时led2被点亮
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/irq_handle.png)
 ### 在main中设置中断并将中断处理函数（isr_handler）与中断标志（BUTTONS_INTERRUPT）连接起来，如下图所示：
-  ![]()
+  ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/irq_attach.png)
   * 其中的BUTTONS_INTERRUPT为target中添加的，如下图所示，target设置按钮这个gpio，允许了中断，并将buttons添加到了irq中，所以中断标志叫BUTTONS_INTERRUPT，同理如果添加的叫switches，则中断标志位叫SWITCHES_INTERRUPT
   * 如果有多个中断要则可以像下面所示的来写，这里把按钮和开关中断都放在同一个中断函数处理中（isr_handler）来处理：
      ```
