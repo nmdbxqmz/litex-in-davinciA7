@@ -5,11 +5,11 @@
 * 因为暂时没有学GCC和makefile的编写，所以只能在原demo的基础上微调，该目录中的demo移植了江协的OLED，可以显示字符串和播放动画
 
 ## 目录
-* 几个重要的.h文件
-* 如何添加自己的.c文件
-* 如何生成Bin文件
-* gpio的使用
-* 中断的使用
+* [几个重要的.h文件](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E7%9A%84h%E6%96%87%E4%BB%B6)
+* [如何添加自己的.c文件](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E5%A6%82%E4%BD%95%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%B7%B1%E7%9A%84c%E6%96%87%E4%BB%B6)
+* [如何生成Bin文件](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90bin%E6%96%87%E4%BB%B6)
+* [gpio的使用](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#gpio%E7%9A%84%E4%BD%BF%E7%94%A8)
+* [中断的使用](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E4%B8%AD%E6%96%AD%E7%9A%84%E4%BD%BF%E7%94%A8)
 * to be continue
   
 ## 几个重要的.h文件
