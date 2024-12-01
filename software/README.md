@@ -9,7 +9,7 @@
 * [如何添加自己的.c文件](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E5%A6%82%E4%BD%95%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%B7%B1%E7%9A%84c%E6%96%87%E4%BB%B6)
 * [如何生成Bin文件](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90bin%E6%96%87%E4%BB%B6)
 * [gpio的使用](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#gpio%E7%9A%84%E4%BD%BF%E7%94%A8)
-* [外设中断的使用](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E4%B8%AD%E6%96%AD%E7%9A%84%E4%BD%BF%E7%94%A8)
+* [外设中断的使用](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E5%A4%96%E8%AE%BE%E4%B8%AD%E6%96%AD%E7%9A%84%E4%BD%BF%E7%94%A8)
 * to be continue
   
 ## 几个重要的.h文件
@@ -68,6 +68,90 @@
   
     ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/boot_json.png)
 * 说明一下，如果板卡上电没有读取到任何程序，那么就会运行默认程序bios.bin，在software中的bios文件夹中可以看到，可能是被写入到了rom.init文件中，烧录时被一起传进去了
+  
 ## gpio的使用
 * 其实按钮、开关等都是GPIO，只是名字不一样而已
+###  常用GPIO函数说明
+* 使能GPIO读和写
+  ```
+  static inline uint32_t gpio0_oe_read(void) {
+  	return csr_read_simple((CSR_BASE + 0x1800L));
+  }
+  static inline void gpio0_oe_write(uint32_t v) {
+  	csr_write_simple(v, (CSR_BASE + 0x1800L));
+  }
+  ```
+* 读GPIO的输入和输出电平
+  ```
+  static inline uint32_t gpio0_in_read(void) {
+	return csr_read_simple((CSR_BASE + 0x1804L));
+  }
+  static inline uint32_t gpio0_out_read(void) {
+  	return csr_read_simple((CSR_BASE + 0x1808L));
+  }
+  ```
+* 写GPIO的输出电平
+  ```
+  static inline void gpio0_out_write(uint32_t v) {
+	csr_write_simple(v, (CSR_BASE + 0x1808L));
+  }
+  ```
+* GPIO模式设置，0为边沿触发，1为电平触发
+  ```
+  static inline void gpio0_mode_write(uint32_t v) {
+  	csr_write_simple(v, (CSR_BASE + 0x180cL));
+  }
+  ```
+* GPIO的边沿设置，0为上升沿，1为下降沿
+  ```
+  static inline uint32_t gpio0_edge_read(void) {
+  	return csr_read_simple((CSR_BASE + 0x1810L));
+  }
+  ```
+* GPIO中断读，可以读出是哪个GPIO触发了中断
+  ```
+  static inline uint32_t gpio0_ev_pending_read(void) {
+	return csr_read_simple((CSR_BASE + 0x1818L));
+  }  
+  ```
+* GPIO中断写，置1为清除标志位
+  ```
+  static inline void gpio0_ev_pending_write(uint32_t v) {
+	csr_write_simple(v, (CSR_BASE + 0x1818L));
+  }
+  ```
+* GPIO使能中断，1位使能，0为不使能
+  ```
+  static inline void gpio0_ev_enable_write(uint32_t v) {
+	csr_write_simple(v, (CSR_BASE + 0x181cL));
+  }
+  ```
+  
+### 单个GPIO
+  * 单个GPIO即使用同个名字的pin只有一个的情况，advancement/no_linux中的gpio0和gpio1就是这种情况，如下图所示：
+    ![]()
+  * 使用上面的函数的时候，参数填0、1即可
+    
+### 多个GPIO
+  * 多个GPIO即使用同个名字的pin有多个的情况，advancement/no_linux中的gbuttons就是这种情况，如下图所示：
+    ![]()
+  * 这种情况下为同名的所有的GPIO共用这些函数，用二进制解释好理解一些，参数的每一bit对应相应的GPIO，顺序为左高右低，，比如有4个button，对应的序号为3、2、1、0，我想使能2和0的写使能，则应该在2、0对应的位上写1，其余的写0，即0101，对应16进制位0x05，此时写使能函数写位位`gpio0_oe_write(0x05)`
+    
 ## 外设中断的使用
+* 这里以启用buttons的中断为例，按下按钮进入中断，打印进入中断的总次数，并点亮与按钮对应位上的led
+### 设置外设的中断配置，如下图所示，设置4个button都为边沿触发，边沿为上升沿，使能中断并清除中断标志位
+  ![]()
+  
+### 编写中断处理函数（isr_handler），如下图所示，当系统进入中断后会判断是否为按钮中断，如果是按钮中断则进入对应的if中执行，下例中，如果按下按钮2，则`buttons_ev_pending_read()`返回值为4，此时led2被点亮
+  ![]()
+### 在main中设置中断并将中断处理函数（isr_handler）与中断标志（BUTTONS_INTERRUPT）连接起来，如下图所示：
+  ![]()
+  * 其中的BUTTONS_INTERRUPT为target中添加的，如下图所示，target设置按钮这个gpio，允许了中断，并将buttons添加到了irq中，所以中断标志叫BUTTONS_INTERRUPT，同理如果添加的叫switches，则中断标志位叫SWITCHES_INTERRUPT
+  * 如果有多个中断要则可以像下面所示的来写，这里把按钮和开关中断都放在同一个中断函数处理中（isr_handler）来处理：
+     ```
+     irq_setmask(irq_getmask() | (1 << BUTTONS_INTERRUPT) | (1 << SWITCHES_INTERRUPT));
+	   irq_attach(BUTTONS_INTERRUPT,isr_handler);
+     irq_attach(SWITCHES_INTERRUPT,isr_handler);
+     irq_setie(1);
+     ```
+  
