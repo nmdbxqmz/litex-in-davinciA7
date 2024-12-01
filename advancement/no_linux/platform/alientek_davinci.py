@@ -15,8 +15,7 @@ _io = [
     # Clk / Rst
     ("clk100",    0, Pins("R4"), IOStandard("LVCMOS33")),
     ("cpu_reset", 0, Pins("U2"), IOStandard("LVCMOS33")),
-
-
+	
     # Leds
     ("user_led", 0, Pins("R2"),  IOStandard("LVCMOS33")),
     ("user_led", 1, Pins("R3"),  IOStandard("LVCMOS33")),
@@ -105,6 +104,38 @@ _io = [
         Subsignal("g",     	Pins("U18 U17 V19 T18 V20 R18 N17 P17 ")),
         Subsignal("r",     	Pins("AB18 AA18 Y19 Y18 W20 W17 V18 V17")),
         IOStandard("LVCMOS33")
+    ),
+
+    # HDMI In
+    ("hdmi_in", 0,
+        Subsignal("clk_p",   Pins("C18"), IOStandard("TMDS_33")),
+        Subsignal("clk_n",   Pins("c19"), IOStandard("TMDS_33")),
+        Subsignal("data0_p", Pins("C22"), IOStandard("TMDS_33")),
+        Subsignal("data0_n", Pins("B22"), IOStandard("TMDS_33")),
+        Subsignal("data1_p", Pins("B21"), IOStandard("TMDS_33")),
+        Subsignal("data1_n", Pins("A21"), IOStandard("TMDS_33")),
+        Subsignal("data2_p", Pins("B20"), IOStandard("TMDS_33")),
+        Subsignal("data2_n", Pins("P20"), IOStandard("TMDS_33")),
+        Subsignal("scl",     Pins("D22"), IOStandard("LVCMOS33")),
+        Subsignal("sda",     Pins("D21"), IOStandard("LVCMOS33")),
+        Subsignal("hpd",     Pins("E22"), IOStandard("LVCMOS33")),
+        #Subsignal("oen",     Pins("E22"), IOStandard("LVCMOS33")),
+    ),
+
+    # HDMI Out
+    ("hdmi_out", 0,
+        Subsignal("clk_p",   Pins("B17"), IOStandard("TMDS_33")),
+        Subsignal("clk_n",   Pins("B18"), IOStandard("TMDS_33")),
+        Subsignal("data0_p", Pins("A18"), IOStandard("TMDS_33")),
+        Subsignal("data0_n", Pins("A19"), IOStandard("TMDS_33")),
+        Subsignal("data1_p", Pins("A15"), IOStandard("TMDS_33")),
+        Subsignal("data1_n", Pins("A16"), IOStandard("TMDS_33")),
+        Subsignal("data2_p", Pins("A13"), IOStandard("TMDS_33")),
+        Subsignal("data2_n", Pins("A14"), IOStandard("TMDS_33")),
+        Subsignal("scl",     Pins("C17"), IOStandard("LVCMOS33")),
+        Subsignal("sda",     Pins("D20"), IOStandard("LVCMOS33")),
+        Subsignal("hdp",     Pins("E18"), IOStandard("LVCMOS33")),
+     	#Subsignal("oen",     Pins("C20"), IOStandard("LVCMOS33")),
     ),
 	
     # RGMII Ethernet
