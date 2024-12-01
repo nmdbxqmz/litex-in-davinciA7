@@ -88,6 +88,8 @@ static void help(void)
 #endif
 	puts("donut              - Spinning Donut demo");
 	puts("helloc             - Hello C");
+	puts("oled             	 - OLED_TEST");
+	puts("oled_printf        - OLED_TEST");
 #ifdef WITH_CXX
 	puts("hellocpp           - Hello C++");
 #endif
@@ -150,6 +152,22 @@ static void helloc_cmd(void)
 	helloc();
 }
 
+extern void OLED_TEST(void);
+
+static void oled_cmd0(void)
+{
+	printf("OLED demo...\n");
+	OLED_TEST();
+}
+
+extern void OLED_PRINT(void);
+
+static void oled_cmd1(void)
+{
+	printf("OLED_PRINT demo...\n");
+	OLED_PRINT();
+}
+
 #ifdef WITH_CXX
 extern void hellocpp(void);
 
@@ -181,15 +199,13 @@ static void console_service(void)
 		led_cmd();
 #endif
 	else if(strcmp(token, "donut") == 0)
-	{
-		printf("Hello C dount...\n");
 		donut_cmd();
-	}
 	else if(strcmp(token, "helloc") == 0)
-	{
-		printf("Hello C demo...\n");
 		helloc_cmd();
-	}
+	else if(strcmp(token, "oled") == 0)
+		oled_cmd0();
+	else if(strcmp(token, "oled_printf") == 0)
+		oled_cmd1();
 #ifdef WITH_CXX
 	else if(strcmp(token, "hellocpp") == 0)
 		hellocpp_cmd();
@@ -197,37 +213,44 @@ static void console_service(void)
 	prompt();
 }
 
-int i = 0;
+int i=0;
 
 void isr_handler(void);
 void isr_handler(void)
 {
-	if(switches_ev_pending_read())
+	if(buttons_ev_pending_read())
 	{
-		switches_ev_pending_write(0x01);
-		printf("Hello%d\n",i++);
+		leds_out_write(buttons_ev_pending_read());
+		buttons_ev_pending_write(0x0f);
+		printf("BUTTONS_INTRRUPT%d\n",i++);
+		busy_wait(300);
 	}
 }
 
 int main(void)
 {
 	uart_init();
-	#ifdef CONFIG_CPU_HAS_INTERRUPT
-	irq_setmask(irq_getmask() |(1 << SWITCHES_INTERRUPT));
-	irq_attach(SWITCHES_INTERRUPT,isr_handler);
+        #ifdef CONFIG_CPU_HAS_INTERRUPT
+	irq_setmask(irq_getmask() |(1 << BUTTONS_INTERRUPT));
+	irq_attach(BUTTONS_INTERRUPT,isr_handler);
 	irq_setie(1);
 	#endif
-	switches_mode_write(0x00);
-	switches_edge_write(0x00);
-	switches_ev_pending_write(0x01);
+	gpio0_oe_write(0x01);
+	gpio1_oe_write(0x01);
+	buttons_mode_write(0x00);
+	buttons_edge_write(0x00);
+	buttons_ev_pending_write(0x0f);
 	
-	switches_ev_enable_write(0x01);
-	switches_ev_pending_write(0x01);
+	buttons_ev_enable_write(0x0f);
+	buttons_ev_pending_write(0x0f);
+	
 	help();
 	prompt();
+
 	while(1) 
 	{
-		console_service();
+	          console_service();
 	}
+
 	return 0;
 }

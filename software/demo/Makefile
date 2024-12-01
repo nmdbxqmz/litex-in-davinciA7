@@ -1,9 +1,9 @@
-BUILD_DIR?=../build/arty
+BUILD_DIR?=../build/alientek_davinci
 
 include $(BUILD_DIR)/software/include/generated/variables.mak
 include $(SOC_DIRECTORY)/software/common.mak
 
-OBJECTS   = donut.o helloc.o crt0.o main.o
+OBJECTS   = donut.o helloc.o crt0.o oled.o main.o
 ifdef WITH_CXX
 	OBJECTS += hellocpp.o
 	CFLAGS += -DWITH_CXX
