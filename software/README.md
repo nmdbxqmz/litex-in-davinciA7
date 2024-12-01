@@ -9,7 +9,7 @@
 * [如何添加自己的.c文件](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E5%A6%82%E4%BD%95%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%B7%B1%E7%9A%84c%E6%96%87%E4%BB%B6)
 * [如何生成Bin文件](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90bin%E6%96%87%E4%BB%B6)
 * [gpio的使用](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#gpio%E7%9A%84%E4%BD%BF%E7%94%A8)
-* [中断的使用](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E4%B8%AD%E6%96%AD%E7%9A%84%E4%BD%BF%E7%94%A8)
+* [外设中断的使用](https://github.com/nmdbxqmz/litex-in-davinciA7/tree/master/software#%E4%B8%AD%E6%96%AD%E7%9A%84%E4%BD%BF%E7%94%A8)
 * to be continue
   
 ## 几个重要的.h文件
@@ -69,4 +69,5 @@
     ![](https://github.com/nmdbxqmz/litex-in-davinciA7/blob/master/images/software/boot_json.png)
 * 说明一下，如果板卡上电没有读取到任何程序，那么就会运行默认程序bios.bin，在software中的bios文件夹中可以看到，可能是被写入到了rom.init文件中，烧录时被一起传进去了
 ## gpio的使用
-## 中断的使用
+* 其实按钮、开关等都是GPIO，只是名字不一样而已
+## 外设中断的使用
