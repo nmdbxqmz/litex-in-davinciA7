@@ -121,7 +121,7 @@ class BaseSoC(SoCCore):
                 pads     = platform.request_all("user_btn"),
                 with_irq = self.irq.enabled
             )
-	self.irq.add(buttons)
+		self.irq.add(buttons)
 
         # GPIOs ------------------------------------------------------------------------------------
         if with_gpio:
