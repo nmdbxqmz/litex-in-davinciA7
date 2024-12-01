@@ -89,7 +89,7 @@ static void help(void)
 	puts("donut              - Spinning Donut demo");
 	puts("helloc             - Hello C");
 	puts("oled             	 - OLED_TEST");
-	puts("oled_printf        - OLED_TEST");
+	puts("oled_print         - OLED_PRINT");
 #ifdef WITH_CXX
 	puts("hellocpp           - Hello C++");
 #endif
@@ -204,7 +204,7 @@ static void console_service(void)
 		helloc_cmd();
 	else if(strcmp(token, "oled") == 0)
 		oled_cmd0();
-	else if(strcmp(token, "oled_printf") == 0)
+	else if(strcmp(token, "oled_print") == 0)
 		oled_cmd1();
 #ifdef WITH_CXX
 	else if(strcmp(token, "hellocpp") == 0)
